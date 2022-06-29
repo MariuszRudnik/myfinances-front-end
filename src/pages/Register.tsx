@@ -1,24 +1,23 @@
 import React, {SyntheticEvent, useState} from "react";
 import { REGISTERHost } from "../utils/dictionaries";
+import {useNavigate} from "react-router-dom";
 
 export const Register = () =>{
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const submit = async (e:SyntheticEvent) =>{
         e.preventDefault();
-        const response = await fetch(REGISTERHost, {
+         await fetch(REGISTERHost, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 email,
                 pwd:password,
             })
-        })
-        const content = await response.json();
-
-        console.log(content);
-
+        });
+        navigate('/login');
     }
 
     return (
