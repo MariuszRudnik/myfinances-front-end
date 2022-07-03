@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useContext } from "react";
+import {Context} from "../provider/mainProvider";
+
 
 export const Home = () =>{
+    const {email} = useContext(Context);
     return (
         <div>
-            Home
+            {email ? 'Hi ' + email : "You are not logged in"}
         </div>
     )
 }

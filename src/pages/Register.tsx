@@ -1,13 +1,13 @@
-import React, {SyntheticEvent, useState} from "react";
+import React, {SyntheticEvent, useContext, useState} from "react";
 import { REGISTERHost } from "../utils/dictionaries";
 import {useNavigate} from "react-router-dom";
+
 
 export const Register = () =>{
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
-
     const submit = async (e:SyntheticEvent) =>{
         e.preventDefault();
          await fetch(REGISTERHost, {
