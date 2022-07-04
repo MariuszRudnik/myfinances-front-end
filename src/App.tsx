@@ -8,17 +8,19 @@ import {Register} from "./pages/Register";
 import {MainProvider} from "./provider/mainProvider";
 
 
+
 function App() {
     return (
       <BrowserRouter>
           <MainProvider>
                 <div className="App">
                       <Nav/>
-                      <main className="form-signin">
+                      <main>
                           <Routes>
-                              <Route path="/"  element={ <Home/>} />
-                              <Route path="login" element={ <Login/>} />
+                              <Route path="/*"  element={ <Home/>} />
+                              <Route path="/login" element={ <Login/>} />
                               <Route path="/register" element={ <Register/>} />
+
                           </Routes>
                       </main>
                 </div>

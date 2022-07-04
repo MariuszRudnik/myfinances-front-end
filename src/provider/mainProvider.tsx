@@ -6,6 +6,9 @@ export const Context = createContext<null | string | any >(null);
 export const MainProvider = (props:PropsWithChildren)=>{
     const [email, setEmail] = useState('');
 
+    // -----  List of Wallet
+    const [listOfWallets, setListOfWallets] = useState([]);
+    //----
     useEffect(()=>{
         (
             async ()=>{
@@ -21,7 +24,7 @@ export const MainProvider = (props:PropsWithChildren)=>{
     })
 
     return (
-        <Context.Provider value={{email, setEmail}}>
+        <Context.Provider value={{email, setEmail, listOfWallets, setListOfWallets }}>
                 {props.children}
         </Context.Provider>
     )

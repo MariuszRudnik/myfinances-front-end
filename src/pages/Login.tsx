@@ -28,7 +28,7 @@ export const Login = ()=>{
         const content = await response.json();
         setEmail(content.email)
 
-        console.log('zaglowany');
+        console.log('LockIn');
         console.log(content);
         navigate('/');
     }
