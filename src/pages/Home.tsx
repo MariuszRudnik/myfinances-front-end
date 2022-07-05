@@ -2,35 +2,41 @@ import React, {useContext } from "react";
 import {Context} from "../provider/mainProvider";
 
 import {AddTransactions} from "../components/transactions/AddTransactions";
-import {AddWallet} from "../components/wallet/AddWallet";
+import {AddWalletComponent} from "../components/wallet/AddWallet/AddWalletComponent";
 import {ListOfWallets} from "../components/wallet/ListOfWallet";
 
 import {Route, Routes, useParams} from "react-router-dom";
-// {email ? 'Hi ' + email : "You are not logged in"}
+import {AddWallet} from "../components/wallet/AddWallet";
+import {AddedWallet} from "../components/wallet/AddWallet/AddedWallet";
+import {TransactionList} from "../components/transactions/TransactionList";
+
 
 
 export const Home = () =>{
-    const {email} = useContext(Context);
-    const params = useParams();
-    console.log('ddd')
-    console.log(params)
+
+    // const params = useParams();
+    // console.log('ddd')
+    // console.log(params)
     return (
         <>
-            <div>
-                <ul>
-                    <li>Add</li>
-                    <li>Operations</li>
-                    <li>Overview</li>
-                    <li>Summary</li>
-                    <li>Reports</li>
-                    <li>Wallet</li>
-                </ul>
+
+            <nav className="t-nav">
                 <ListOfWallets/>
-            </div>
+                {/*<ul>*/}
+                {/*    <li>Add</li>*/}
+                {/*    <li>Operations</li>*/}
+                {/*    <li>Overview</li>*/}
+                {/*    <li>Summary</li>*/}
+                {/*    <li>Reports</li>*/}
+                {/*    <li>Wallet</li>*/}
+                {/*</ul>*/}
+            </nav>
             <Routes>
                 <Route path="/wallet/add" element={<AddWallet/>}/>
-                <Route path="/wallet/:id" element={<AddTransactions/>}/>
+                <Route path="/wallet/added" element={<AddedWallet/>}/>
+                <Route path="/wallet/:id/*" element={<TransactionList/>}/>
             </Routes>
         </>
+
     )
 }

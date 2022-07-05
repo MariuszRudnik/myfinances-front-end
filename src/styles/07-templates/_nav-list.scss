@@ -1,0 +1,16 @@
+.t-nav {
+  padding: $grid-base;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+
+  &__iCom{
+    width: 24px;
+  }
+
+}

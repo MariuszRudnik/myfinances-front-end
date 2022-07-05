@@ -9,6 +9,13 @@ export const MainProvider = (props:PropsWithChildren)=>{
     // -----  List of Wallet
     const [listOfWallets, setListOfWallets] = useState([]);
     //----
+    const [valueNewWallet, setValueNewWallet] = useState({
+        nameWalled: "",
+        openingBalance: 0,
+        chooseACurrency: "PLN"
+    });
+
+
     useEffect(()=>{
         (
             async ()=>{
@@ -24,7 +31,11 @@ export const MainProvider = (props:PropsWithChildren)=>{
     })
 
     return (
-        <Context.Provider value={{email, setEmail, listOfWallets, setListOfWallets }}>
+        <Context.Provider value={{
+            email, setEmail,
+            listOfWallets, setListOfWallets,
+            valueNewWallet, setValueNewWallet
+        }}>
                 {props.children}
         </Context.Provider>
     )

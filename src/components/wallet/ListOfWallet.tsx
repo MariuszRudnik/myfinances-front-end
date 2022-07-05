@@ -1,11 +1,12 @@
 import React, {useContext, useEffect} from "react";
-import {GETUserHost} from "../../utils/dictionaries";
 import {Context} from "../../provider/mainProvider";
 import {Link} from "react-router-dom";
+import walletIcon from '../../images/wallet.png'
+
 
 interface walletMap {
-    id?: string | null;
-    nameWalled?: string | null;
+    id: string | null;
+    nameWalled: string | null;
     openingBalance?: number | null;
     chooseACurrency?: string | null;
 }
@@ -22,7 +23,6 @@ export const ListOfWallets = ()=> {
                     credentials: "include",
                 });
                 const content = await response.json();
-                console.log(content)
                 setListOfWallets(content)
             }
         )();
@@ -34,11 +34,9 @@ export const ListOfWallets = ()=> {
         </li>
     ))
 
-
-
     return (
         <div>
-            <h1>List of Wallets</h1>
+            <div className="t-nav__heading"><img src={walletIcon} className="t-nav__iCom" /> <p> List of Wallets </p></div>
             <ul>
                 <li><Link to="/wallet/add">Add Wallet</Link></li>
                 {list}
