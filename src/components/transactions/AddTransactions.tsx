@@ -9,7 +9,9 @@ export const AddTransactions = ()=>{
         category: '',
         dateExpenses: "",
         price: 0,
+        operations: ""
     });
+    console.log(valueNewTransaction)
     const params = useParams();
     const { id:idWallet } = params;
 
@@ -23,10 +25,10 @@ export const AddTransactions = ()=>{
                 nameTransactions: valueNewTransaction.nameTransactions,
                 category: valueNewTransaction.category,
                 price: valueNewTransaction.price,
+                operations: valueNewTransaction.operations,
                 dateExpenses: valueNewTransaction.dateExpenses
             })
         });
-        console.log('sss')
     }
 
 
@@ -44,8 +46,11 @@ export const AddTransactions = ()=>{
                         nameTransactions: e.target.value
                     })}
                     />
-                    <select>
-                        <option>Expenses</option>
+                    <select onChange={e=> setValueNewTransaction({
+                            ...valueNewTransaction,
+                           operations: e.target.value
+                        } )}>
+                        <option >Expenses</option>
                         <option>Influence</option>
                     </select>
 
