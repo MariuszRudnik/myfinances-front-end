@@ -1,9 +1,9 @@
 import React, {SyntheticEvent, useState} from "react";
 import {POSTListOfWallets, Transaction} from "../../utils/dictionaries";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 export const AddTransactions = ()=>{
-
+    const navigate = useNavigate();
     const [valueNewTransaction , setValueNewTransaction] = useState({
         nameTransactions: '',
         category: '',
@@ -29,6 +29,7 @@ export const AddTransactions = ()=>{
                 dateExpenses: valueNewTransaction.dateExpenses
             })
         });
+        navigate('added')
     }
 
 

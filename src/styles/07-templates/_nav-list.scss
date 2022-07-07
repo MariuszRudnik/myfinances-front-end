@@ -1,5 +1,7 @@
 .t-nav {
   padding: $grid-base;
+  width: auto;
+  min-width: 200px;
 
   &__heading {
     display: flex;

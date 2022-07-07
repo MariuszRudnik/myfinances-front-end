@@ -9,6 +9,7 @@ import {Route, Routes, useParams} from "react-router-dom";
 import {AddWallet} from "../components/wallet/AddWallet";
 import {AddedWallet} from "../components/wallet/AddWallet/AddedWallet";
 import {TransactionList} from "../components/transactions/TransactionList";
+import {Wallet} from "../components/wallet/wallet";
 
 
 
@@ -22,19 +23,12 @@ export const Home = () =>{
 
             <nav className="t-nav">
                 <ListOfWallets/>
-                {/*<ul>*/}
-                {/*    <li>Add</li>*/}
-                {/*    <li>Operations</li>*/}
-                {/*    <li>Overview</li>*/}
-                {/*    <li>Summary</li>*/}
-                {/*    <li>Reports</li>*/}
-                {/*    <li>Wallet</li>*/}
-                {/*</ul>*/}
             </nav>
+
             <Routes>
                 <Route path="/wallet/add" element={<AddWallet/>}/>
                 <Route path="/wallet/added" element={<AddedWallet/>}/>
-                <Route path="/wallet/:id/*" element={<TransactionList/>}/>
+                <Route path="/wallet/:id/*" element={<Wallet/>}/>
             </Routes>
         </>
 

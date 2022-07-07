@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {Link, Route, Routes, useParams} from "react-router-dom";
+import {Link, Route, Routes, useNavigate, useParams} from "react-router-dom";
 import {AddTransactions} from "./AddTransactions";
 import "./style.scss";
 import {AddedTransactions} from "./AddedTransactions";
+import {Transaction} from "../../utils/dictionaries";
 
 interface transactionList {
     id: string;
@@ -25,13 +26,14 @@ export const TransactionList = () => {
     useEffect(()=>{
         (
             async ()=>{
-                const response = await fetch('http://localhost:3001/transactions/95927ed7-2344-410b-ad44-42f28bcdc31b', {
+                const response = await fetch( Transaction + idWallet , {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'},
                     credentials: "include",
                 });
                 const content = await response.json();
                 setTransactionList(content);
+
             }
         )();
     },[]);
@@ -39,32 +41,26 @@ export const TransactionList = () => {
     transactionList.map((transaction:transactionList) => (console.log(typeof transaction.dateExpenses)))
 
     const list = transactionList.map((transaction:transactionList) => (
-
         <li key={transaction.id}>
             <div className="transaction">
-                <p>{transaction.nameTransactions} </p>
-                <p>{transaction.category} </p>
-                <p>{transaction.price} </p>
-                <p>{transaction.dateExpenses}</p>
+                <div className="transaction__properties">
+                    <p className="transaction__name">{transaction.nameTransactions} </p>
+                    <p className="transaction__price">{transaction.price} </p>
+                    <p className="transaction__category">{transaction.category} </p>
+                </div>
+                <div>
+                    <p>{transaction.dateExpenses}</p>
+                </div>
+
             </div>
         </li>
     ))
-    console.log('----')
-    console.log(list)
 
     return (
-        <div>
-            <Link to="addTranslation">Add transation</Link>
-            <h1>Transaction</h1>
+        <div className="o-transaction">
             <ul>
                 {list}
             </ul>
-
-            <Routes>
-                <Route path="/ss" element={<AddTransactions/>}/>
-                <Route path="/addTranslation" element={<AddTransactions/>}/>
-                <Route path="/addedTranslation" element={<AddedTransactions/>}/>
-            </Routes>
         </div>
     )
 }
