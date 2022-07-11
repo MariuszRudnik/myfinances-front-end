@@ -2,7 +2,8 @@ import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
 import { LOGOutHost} from "../../utils/dictionaries";
 import {Context} from "../../provider/mainProvider";
-
+import walletIcon from "../../images/wallet.png";
+import listMenu from "../../images/menu.png"
 
 const Nav = () => {
     const {email, setEmail} = useContext(Context);
@@ -18,38 +19,41 @@ const Nav = () => {
 
     if(email === undefined ){
         menu = (
-            <div className="collapse navbar-collapse" id="navbarCollapse">
-                <ul className="navbar-nav me-auto mb-2 mb-md-0">
-                    <li className="nav-item">
-                        <Link to="login" className="nav-link active"  >Login</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="register" className="nav-link active"  >Register</Link>
-                    </li>
-                </ul>
+            <div >
+                        <Link className="t-site-header__link" to="login"  >Login</Link>
+                        <Link  className="t-site-header__link" to="register">Register</Link>
             </div>
         )
     } else {
         menu = (
-            <ul className="navbar-nav me-auto mb-2 mb-md-0">
-                <li className="nav-item">
-                    <Link to="login" onClick={logout} className="nav-link active">Logout</Link>
-                </li>
-            </ul>
+            <div>
+                    <Link className="t-site-header__link" to="login" onClick={logout}>Logout</Link>
+
+            </div>
         )
     }
 
 
     return (
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-            <div className="container-fluid">
-                <Link to="/" className="navbar-brand" >Home</Link>
+        <div className="t-site-header">
 
-                <div>
+            <nav className="o-container t-site-header__nav ">
+                <div className="t-site-header__center">
+                    {/*<img src={listMenu} className="t-site-header__logoImg" />*/}
+                </div>
+                <Link className="t-site-header__home" to="/">
+                     <div className="t-site-header__home">
+                        <div>
+                            <img src={walletIcon} className="t-site-header__logoImg" />
+                        </div>
+                        <div className="t-site-header__logoText">My Finances </div>
+                     </div>
+                </Link>
+                <div className="t-site-header__center">
                     {menu}
                 </div>
-            </div>
-        </nav>
+             </nav>
+        </div>
     );
 };
 

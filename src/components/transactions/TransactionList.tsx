@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Link, Route, Routes, useNavigate, useParams} from "react-router-dom";
-import {AddTransactions} from "./AddTransactions";
 import "./style.scss";
-import {AddedTransactions} from "./AddedTransactions";
-import {Transaction} from "../../utils/dictionaries";
+import {GETTransactionExpenses, POSTListOfWallets, Transaction} from "../../utils/dictionaries";
+import {Context} from "../../provider/mainProvider";
+import {ChartsTransaction} from "./charts/charts-transaction";
+import {InfoTransactions} from "./InfoTransactions";
 
 interface transactionList {
     id: string;
@@ -13,16 +14,31 @@ interface transactionList {
     dateExpenses?: string;
     operations?: string;
 }
+interface getWallet {
+    id?: string,
+    userId?: string,
+    nameWalled?: string,
+    openingBalance?: number,
+    chooseACurrency?: string
+
+}
 
 
 export const TransactionList = () => {
+    const {counter} = useContext(Context);
     const [transactionList, setTransactionList] = useState([{
         id: "Loading",
         nameTransactions: "Loading",
-    }])
+    }]);
+    const [openWallet, setOpenWallet] = useState({});
+    const [expensesValue, setExpensesValue] = useState({
+        expenses: 0,
+        influence: 0
+    });
 
     const params = useParams();
     const { id:idWallet } = params;
+
     useEffect(()=>{
         (
             async ()=>{
@@ -31,24 +47,49 @@ export const TransactionList = () => {
                     headers: {'Content-Type': 'application/json'},
                     credentials: "include",
                 });
-                const content = await response.json();
-                setTransactionList(content);
+                const contentGet = await response.json();
+                setTransactionList(contentGet);
 
+                const walletSetting = await fetch( POSTListOfWallets  + idWallet , {
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: "include",
+                });
+                const GetWalletSetting = await walletSetting.json();
+                const wallet:getWallet = (GetWalletSetting[0]);
+                setOpenWallet(wallet);
+
+                const value = await fetch( GETTransactionExpenses + idWallet , {
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'},
+                    credentials: "include",
+                });
+
+                const valueGet = await value.json();
+                setExpensesValue(valueGet);
             }
-        )();
-    },[]);
 
-    transactionList.map((transaction:transactionList) => (console.log(typeof transaction.dateExpenses)))
+        )();
+    },[counter]);
+    const getStartWallet:getWallet = openWallet;
+
+    const DeleteTransaction = () =>{
+        console.log('Delete')
+    }
 
     const list = transactionList.map((transaction:transactionList) => (
         <li key={transaction.id}>
             <div className="transaction">
                 <div className="transaction__properties">
-                    <p className="transaction__name">{transaction.nameTransactions} </p>
-                    <p className="transaction__price">{transaction.price} </p>
+                    {transaction.operations === 'Expenses'?
+                        <p className="transaction__name">{transaction.nameTransactions} </p>:
+                        <p className="transaction__name--green">{transaction.nameTransactions} </p> }
+                    <p className="transaction__price">{transaction.price} {getStartWallet.chooseACurrency} </p>
                     <p className="transaction__category">{transaction.category} </p>
+
                 </div>
-                <div>
+                <div className="transaction__box">
+                    <button onClick={DeleteTransaction} className="transaction__delete"> Delete</button>
                     <p>{transaction.dateExpenses}</p>
                 </div>
 
@@ -57,7 +98,12 @@ export const TransactionList = () => {
     ))
 
     return (
+
         <div className="o-transaction">
+            <div className="u-flex">
+                <ChartsTransaction expensesValue={expensesValue} getStartWallet={getStartWallet.chooseACurrency} />
+                <InfoTransactions expensesValue={expensesValue} getStartWallet={getStartWallet.chooseACurrency}/>
+            </div>
             <ul>
                 {list}
             </ul>

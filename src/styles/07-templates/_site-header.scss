@@ -1,67 +1,36 @@
 .t-site-header {
-    background: url('../images/header-tlo.jpg') 0 0 no-repeat;
-
-    @include large-up {
-        clip-path: ellipse(68% 450px at 50% 28%);
-        padding-bottom: $grid-base * 4;
+    background-color: rgba(0, 15, 30, 0.02);
+    height: auto;
+    width: 100%;
+    margin-bottom: 26px;
+    border: rgba(68, 68, 68, 0.11) solid 1px;
+    &__nav{
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        min-height: 64px;
+    }
+    &__home{
+        display: flex;
+        align-items: center;
+    }
+    &__logoImg {
+        width: 36px;
+    }
+    &__logoText{
+        font-size: $font-size-2;
+        font-family: Arial;
+        color: $blue-text;
+        margin: 0 0 0 15px;
+    }
+    &__center{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__link{
+        margin: 10px;
+        font-size: $font-size-3;
     }
 
-    &__top {
-        padding-bottom: $grid-base * 2.5;
-        padding-top: $grid-base * 2.5;
-    }
-
-    &__menu {
-        margin-top: $grid-base * 2;
-
-        @include large-up {
-            text-align: right;
-            margin-top: 0;
-        }
-    }
-
-    &__divider {
-        background-color: $white;
-        height: 1px;
-        opacity: .75;
-    }
-
-    &__hero {
-        padding-bottom: $grid-base * 5;
-        padding-top: $grid-base * 5;
-        margin: 0 auto;
-        text-align: center;
-        
-        @include large-up {
-            padding-bottom: $grid-base * 12;
-            padding-top: $grid-base * 11;
-            max-width: 800px;
-
-        }
-    }
-
-    &__intro-text {
-        color: $white;
-        font-size: $font-size-4;
-        margin-bottom: $grid-base * 2;
-        margin-top: $grid-base * 3;
-        
-        @include large-up {
-            font-size: $font-size-3;
-            line-height: 1.66;
-            margin-bottom: $grid-base * 6;
-        }
-    }
-
-    &__btn-divider {
-        color: $white;
-        display: block;
-        font-size: $font-size-5;
-        font-weight: 700;
-        margin: $grid-base * 2;
-
-        @include medium-up {
-            display: inline-block;
-        }
-    }
 }

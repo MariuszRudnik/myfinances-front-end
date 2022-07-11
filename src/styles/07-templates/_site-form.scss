@@ -1,0 +1,21 @@
+.t-site-form{
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  &__input{
+    height: 65px;
+    width: 300px;
+    border-radius: 5px;
+    border: #444444 1px solid;
+  }
+  &__button{
+    height: 42px;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    color: #60DC64;
+  }
+  &__h1{
+    font-size: $font-size-2;
+  }
+}

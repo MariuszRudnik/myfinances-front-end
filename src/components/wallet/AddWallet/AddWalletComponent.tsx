@@ -30,18 +30,18 @@ export const  AddWalletComponent = ( )=>{
     }
 
     return (
-        <div>
-            <h1>Add Wallet</h1>
-            <label>
-                <input type="text" placeholder="Name Wallet" onChange={e=> setValueNewWallet({
+        <div className="u-flex u-flex__column t-site-form">
+            <h1 className="t-site-form__h1">Add Wallet</h1>
+            <label className="u-flex u-flex__column" >
+                <input className="t-site-form__input" type="text" placeholder="Name Wallet" onChange={e=> setValueNewWallet({
                     ...valueNewWallet,
                     nameWalled: e.target.value
                 })}/>
-                <input type="number" placeholder="Opening Balance"  onChange={e=> setValueNewWallet({
+                <input className="t-site-form__input" type="number" placeholder="Opening Balance"  onChange={e=> setValueNewWallet({
                     ...valueNewWallet,
                     openingBalance: Number(e.target.value)
                 })}/>
-                <select onChange={e=> setValueNewWallet({
+                <select className="t-site-form__input" onChange={e=> setValueNewWallet({
                     ...valueNewWallet,
                     chooseACurrency: e.target.value
                 })}>
@@ -49,7 +49,7 @@ export const  AddWalletComponent = ( )=>{
                     <option>USD</option>
                     <option>EURO</option>
                 </select>
-                <button onClick={handleClick}>Save</button>
+                <button className="t-site-form__button" onClick={handleClick}>Save</button>
             </label>
 
         </div>

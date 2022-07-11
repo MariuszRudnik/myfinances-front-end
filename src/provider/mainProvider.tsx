@@ -14,6 +14,9 @@ export const MainProvider = (props:PropsWithChildren)=>{
         openingBalance: 0,
         chooseACurrency: "PLN"
     });
+    //------
+    const [counter, setCounter] = useState(0);
+    //------
 
 
     useEffect(()=>{
@@ -34,7 +37,8 @@ export const MainProvider = (props:PropsWithChildren)=>{
         <Context.Provider value={{
             email, setEmail,
             listOfWallets, setListOfWallets,
-            valueNewWallet, setValueNewWallet
+            valueNewWallet, setValueNewWallet,
+            counter, setCounter
         }}>
                 {props.children}
         </Context.Provider>

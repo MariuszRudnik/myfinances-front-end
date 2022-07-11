@@ -1,15 +1,15 @@
 import React, {SyntheticEvent, useState} from "react";
-import {POSTListOfWallets, Transaction} from "../../utils/dictionaries";
+import {POSTExpenseCategory, POSTListOfWallets, Transaction} from "../../utils/dictionaries";
 import {useNavigate, useParams} from "react-router-dom";
 
 export const AddTransactions = ()=>{
     const navigate = useNavigate();
     const [valueNewTransaction , setValueNewTransaction] = useState({
         nameTransactions: '',
-        category: '',
+        category: 'Other',
         dateExpenses: "",
         price: 0,
-        operations: ""
+        operations: "Expenses"
     });
     console.log(valueNewTransaction)
     const params = useParams();
@@ -32,22 +32,40 @@ export const AddTransactions = ()=>{
         navigate('added')
     }
 
+    const sprawdzam = async (e:SyntheticEvent) =>{
+        e.preventDefault();
+        const response = await fetch(POSTExpenseCategory, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+            credentials: "include",
+        });
+        const content = await response.json();
+        console.log(content)
+    }
 
     return (
-        <div>
+        <div className="u-flex u-flex__column">
             <h1>Add Transactions</h1>
-                <form>
-                    <input placeholder="Category" onChange={e=> setValueNewTransaction({
+                <form  className="u-flex u-flex__column">
+
+                    <select className="t-site-form__input" onChange={e=> setValueNewTransaction({
                         ...valueNewTransaction,
                         category: e.target.value
-                    })}
-                    />
-                    <input placeholder="Name" onChange={e=> setValueNewTransaction({
+                    } )}>
+                        <option>Other</option>
+                        <option >Food</option>
+                        <option>Home</option>
+                        <option>Transport</option>
+                        <option>Entertainment</option>
+                    </select>
+                    <p>You can add more category. </p>
+
+                    <input className="t-site-form__input" placeholder="Name" onChange={e=> setValueNewTransaction({
                         ...valueNewTransaction,
                         nameTransactions: e.target.value
                     })}
                     />
-                    <select onChange={e=> setValueNewTransaction({
+                    <select className="t-site-form__input" onChange={e=> setValueNewTransaction({
                             ...valueNewTransaction,
                            operations: e.target.value
                         } )}>
@@ -55,17 +73,17 @@ export const AddTransactions = ()=>{
                         <option>Influence</option>
                     </select>
 
-                    <input type="number" placeholder="Price"onChange={e=> setValueNewTransaction({
+                    <input className="t-site-form__input" type="number" placeholder="Price"onChange={e=> setValueNewTransaction({
                         ...valueNewTransaction,
                         price: Number(e.target.value)
                     })}
                     />
-                    <input type="date" placeholder="dateExpenses" onChange={e=> setValueNewTransaction({
+                    <input className="t-site-form__input" type="date" placeholder="dateExpenses" onChange={e=> setValueNewTransaction({
                         ...valueNewTransaction,
                         dateExpenses: e.target.value
                     })}
                     />
-                    <button onClick={newTransaction} >Save</button>
+                    <button className="t-site-form__button" onClick={newTransaction} >Save</button>
                 </form>
 
         </div>

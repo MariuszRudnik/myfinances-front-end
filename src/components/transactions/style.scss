@@ -13,11 +13,27 @@
     margin: 0 15px 0 15px;
     font-size: 18px;
     font-weight: bold;
+    &--green{
+      color: #60DC64;
+      margin: 0 15px 0 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
   }
   &__category{
     font-style: italic;
   }
   &__price{
     margin: 0 15px 0 15px;
+  }
+  &__delete{
+    margin: 0 10px;
+    background-color: transparent;
+    border-color: transparent;
+    color: rgba(255, 0, 0, 0.54);
+  }
+  &__box{
+    display: flex;
+
   }
 }

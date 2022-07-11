@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import {Context} from "../../provider/mainProvider";
-import {Link} from "react-router-dom";
-import walletIcon from '../../images/wallet.png'
+import {Link, NavLink} from "react-router-dom";
+
 
 
 interface walletMap {
@@ -12,7 +12,11 @@ interface walletMap {
 }
 
 export const ListOfWallets = ()=> {
-    const {listOfWallets, setListOfWallets} = useContext(Context);
+    const {listOfWallets, setListOfWallets, setCounter, counter} = useContext(Context);
+
+    const countClick = ()=>{
+        setCounter(counter+1)
+    };
 
     useEffect(()=>{
         (
@@ -29,18 +33,18 @@ export const ListOfWallets = ()=> {
     },[])
 
     const list = listOfWallets.map((wallet:walletMap) => (
-        <li key={wallet.id}>
-            <Link to={`/wallet/${wallet.id}`}>{wallet.nameWalled}</Link>
-        </li>
+            <NavLink key={wallet.id} onClick={countClick} to={`/wallet/${wallet.id}`}>{wallet.nameWalled}</NavLink>
     ))
 
     return (
         <div>
-            <div className="t-nav__heading"><img src={walletIcon} className="t-nav__iCom" /> <p> List of Wallets </p></div>
-            <ul>
-                <li><Link to="/wallet/add">Add Wallet</Link></li>
+            <div className="t-nav__heading"><p> List of Wallets </p></div>
+            <nav>
+                <Link to="/wallet/add">Add Wallet</Link>
+                <div className="c-list">
                 {list}
-            </ul>
+                </div>
+            </nav>
         </div>
     )
 }

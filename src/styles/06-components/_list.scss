@@ -1,10 +1,10 @@
 .c-list {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 10px 0 10px 0;
 
-    &__item {
-        margin-bottom: 12px;
-    }
-
-    &--unstyled {
-        list-style-type: none;
+    & .active{
+        color: $blue-dark;
+        font-weight: bold;
     }
 }
