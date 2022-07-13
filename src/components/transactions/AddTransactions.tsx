@@ -1,8 +1,15 @@
-import React, {SyntheticEvent, useState} from "react";
-import {POSTExpenseCategory, POSTListOfWallets, Transaction} from "../../utils/dictionaries";
+import React, {SyntheticEvent, useEffect, useState} from "react";
+import {GETCategory, POSTExpenseCategory, POSTListOfWallets, Transaction} from "../../utils/dictionaries";
 import {useNavigate, useParams} from "react-router-dom";
 
+interface categoryIe {
+    id: string;
+    category: string;
+}
+
+
 export const AddTransactions = ()=>{
+    const [category, setCategory] = useState({category:[]});
     const navigate = useNavigate();
     const [valueNewTransaction , setValueNewTransaction] = useState({
         nameTransactions: '',
@@ -11,9 +18,23 @@ export const AddTransactions = ()=>{
         price: 0,
         operations: "Expenses"
     });
-    console.log(valueNewTransaction)
     const params = useParams();
     const { id:idWallet } = params;
+    useEffect(()=>{
+        (async ()=>{
+            const response = await fetch(GETCategory,{
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+                credentials: "include",
+            })
+                .then(response => response.json())
+                .then(data => setCategory(data));
+                console.log(category)
+        })()
+    },[]);
+    const addListCategory = category.category.map((category:categoryIe)=>(
+        <option key={category.id}>{category.category}</option>
+    ))
 
     const newTransaction = async (e:SyntheticEvent) =>{
         e.preventDefault();
@@ -32,17 +53,6 @@ export const AddTransactions = ()=>{
         navigate('added')
     }
 
-    const sprawdzam = async (e:SyntheticEvent) =>{
-        e.preventDefault();
-        const response = await fetch(POSTExpenseCategory, {
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'},
-            credentials: "include",
-        });
-        const content = await response.json();
-        console.log(content)
-    }
-
     return (
         <div className="u-flex u-flex__column">
             <h1>Add Transactions</h1>
@@ -57,6 +67,7 @@ export const AddTransactions = ()=>{
                         <option>Home</option>
                         <option>Transport</option>
                         <option>Entertainment</option>
+                        {addListCategory}
                     </select>
                     <p>You can add more category. </p>
 

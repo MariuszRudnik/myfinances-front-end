@@ -34,7 +34,8 @@ export const Login = ()=>{
     }
 
     return(
-        <header className="App-header">
+        <header className="">
+
                 <form onSubmit={submin}>
                     <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
                     <input type="email" className="form-control" placeholder="Email adress" required

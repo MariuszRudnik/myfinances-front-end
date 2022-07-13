@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Link, Route, Routes, useNavigate, useParams} from "react-router-dom";
 import "./style.scss";
-import {GETTransactionExpenses, POSTListOfWallets, Transaction} from "../../utils/dictionaries";
+import {GETTransactionExpenses, LOGInHost, POSTListOfWallets, Transaction} from "../../utils/dictionaries";
 import {Context} from "../../provider/mainProvider";
 import {ChartsTransaction} from "./charts/charts-transaction";
 import {InfoTransactions} from "./InfoTransactions";
@@ -25,7 +25,7 @@ interface getWallet {
 
 
 export const TransactionList = () => {
-    const {counter} = useContext(Context);
+    const {counter, setCounter} = useContext(Context);
     const [transactionList, setTransactionList] = useState([{
         id: "Loading",
         nameTransactions: "Loading",
@@ -73,8 +73,15 @@ export const TransactionList = () => {
     },[counter]);
     const getStartWallet:getWallet = openWallet;
 
-    const DeleteTransaction = () =>{
-        console.log('Delete')
+    const DeleteTransaction = async (id: string) =>{
+
+        await fetch(Transaction + id, {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+            credentials: "include",
+
+        });
+        setCounter(counter+1)
     }
 
     const list = transactionList.map((transaction:transactionList) => (
@@ -89,7 +96,7 @@ export const TransactionList = () => {
 
                 </div>
                 <div className="transaction__box">
-                    <button onClick={DeleteTransaction} className="transaction__delete"> Delete</button>
+                    <button onClick={()=>DeleteTransaction(transaction.id)} className="transaction__delete"> Delete</button>
                     <p>{transaction.dateExpenses}</p>
                 </div>
 

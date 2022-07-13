@@ -14,16 +14,18 @@ import {Wallet} from "../components/wallet/Wallet";
 
 export const Home = () =>{
     return (
-        <>
+        <div className="o-row">
             <nav className="t-nav">
                 <ListOfWallets/>
             </nav>
+
+
             <Routes>
                 <Route path="/wallet/add" element={<AddWallet/>}/>
                 <Route path="/wallet/added" element={<AddedWallet/>}/>
                 <Route path="/wallet/:id/*" element={<Wallet/>}/>
             </Routes>
-        </>
+        </div>
 
     )
 }

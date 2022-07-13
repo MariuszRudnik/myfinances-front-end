@@ -7,6 +7,7 @@ export const POSTListOfWallets =  HOST + "list-of-wallets/";
 export const Transaction =  HOST + "transactions/";
 export const POSTExpenseCategory =  HOST + "expensecategory";
 export const GETTransactionExpenses =  HOST + "transactions/expenses/";
+export const GETCategory =  HOST + "expensecategory/";
 
 
 
